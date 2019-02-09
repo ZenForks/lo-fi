@@ -1,7 +1,7 @@
 const { ShardingManager } = require('discord.js');
 
 const shards = new ShardingManager('./server.js', {
-    token: process.env.SECRET,
+    token: "YOUR FRICKING TOKEN HERE",
     totalShards: 'auto'
 });
 
