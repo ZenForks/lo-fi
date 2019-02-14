@@ -32,8 +32,8 @@
     "simple-youtube-api": "^5.1.1",
     "parse-ms": "^2.0.0",
     "i18n": "^0.8.3",
-    "enmap": "^4.6.6",
-    "node-superfetch": "^0.1.9"
+    "node-superfetch": "^0.1.9",
+    "enmap": "^4.6.6"
   },
   "engines": {
     "node": "10.x"
