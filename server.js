@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const db = require('quick.db')
+const { get } = require('node-superfetch')
 const fs = require("fs");
 const lofi = new Discord.Client({ disableEveryone: true });
 const request = require('request')
@@ -43,6 +44,9 @@ lofi.on('message', async message => {
   if (fetched === null) prefix = 'lofi ';
   else prefix = fetched;
   
+  let { body } = await get('https://lofi-canary.glitch.me/api/blacklist/${message.author.id}')
+  if (body === 'not_found') body = false;
+  
   let msg = message.content.toLowerCase();
   let sender = message.author;
   let args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -52,9 +56,9 @@ lofi.on('message', async message => {
   if (!msg.startsWith(prefix) || message.author.bot || message.channel.type === "dm") return;  
 
     try {
-  if (blacklist) {
+  if (body === true){
       return message.channel.send({ embed: { color: 0xcc5353, description: `**Sorry.** You've been blacklisted by Lo-Fi Owner/Developer. [Go to the Support Server](https://discord.gg/MyGH4YC) for Blacklist appeals, or you can email the owner for Blacklist Appeals in here: **\`lofi_appeals@yahoo.com\`**`}});
-  }    
+  }
       let command = require(`./commands/${cmd}.js`);
       command.run(lofi, message, args);
     } catch (e) {
