@@ -45,7 +45,7 @@ lofi.on('message', async message => {
   else prefix = fetched;
   
   let { body } = await get('https://lofi-canary.glitch.me/api/blacklist/${message.author.id}')
-  if (body === 'not_found') body = false;
+  if (body.error === 'not_found') body = false;
   
   let msg = message.content.toLowerCase();
   let sender = message.author;
